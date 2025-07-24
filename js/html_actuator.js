@@ -2,6 +2,8 @@ function HTMLActuator() {
   this.tileContainer    = document.querySelector(".tile-container");
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
+  this.scoreValue       = document.querySelector(".score-value");
+  this.bestValue        = document.querySelector(".best-value");
   this.messageContainer = document.querySelector(".game-message");
 
   this.score = 0;
@@ -104,24 +106,36 @@ HTMLActuator.prototype.positionClass = function (position) {
 };
 
 HTMLActuator.prototype.updateScore = function (score) {
-  this.clearContainer(this.scoreContainer);
-
   var difference = score - this.score;
   this.score = score;
 
-  this.scoreContainer.textContent = this.score;
+  this.scoreValue.textContent = this.score;
 
   if (difference > 0) {
     var addition = document.createElement("div");
     addition.classList.add("score-addition");
     addition.textContent = "+" + difference;
+    addition.style.position = "absolute";
+    addition.style.right = "10px";
+    addition.style.color = "rgba(119, 110, 101, 0.9)";
+    addition.style.fontSize = "14px";
+    addition.style.fontWeight = "bold";
+    addition.style.zIndex = "100";
+    addition.style.animation = "move-up 600ms ease-in";
 
     this.scoreContainer.appendChild(addition);
+    
+    // Remove the addition after animation
+    setTimeout(function() {
+      if (addition.parentNode) {
+        addition.parentNode.removeChild(addition);
+      }
+    }, 600);
   }
 };
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
-  this.bestContainer.textContent = bestScore;
+  this.bestValue.textContent = bestScore;
 };
 
 HTMLActuator.prototype.message = function (won) {

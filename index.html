@@ -2,8 +2,37 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>2048</title>
+  <title>Play 2048 Online | Free Puzzle Game to Merge Tiles & Score High</title>
+  <meta name="description" content="Play the classic 2048 puzzle game online for free. Merge tiles, challenge your skills, and aim for the 2048 tile!">
+  <link rel="canonical" href="https://play2048online.com/index.html">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Play 2048 Online | Free Puzzle Game">
+  <meta property="og:description" content="Merge tiles to reach 2048 in this addictive browser-based puzzle game. No download required!">
+  <meta property="og:image" content="https://play2048online.com/meta/2048.png">
+  <meta property="og:url" content="https://play2048online.com/index.html">
+  <meta property="og:type" content="game">
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Play 2048 Online | Free Puzzle Game">
+  <meta name="twitter:description" content="Instantly play 2048 in your browser. Merge, strategize, and hit that 2048 tile!">
+  <meta name="twitter:image" content="https://play2048online.com/meta/2048.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "2048 Online",
+    "url": "https://play2048online.com/index.html",
+    "description": "Merge numbered tiles to reach 2048 in this free, browser-based puzzle game.",
+    "genre": "PuzzleGame",
+    "applicationCategory": "Game",
+    "image": "https://play2048online.com/meta/2048.png",
+    "author": {"@type":"Organization","name":"YourBrand"}
+  }
+  </script>
+  
   <link href="style/main.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
@@ -18,18 +47,30 @@
 </head>
 <body>
   <div class="container">
-    <div class="heading">
-      <h1 class="title">2048</h1>
-      <div class="scores-container">
-        <div class="score-container">0</div>
-        <div class="best-container">0</div>
+    <!-- 三列导航栏布局 -->
+    <nav class="navbar">
+      <div class="navbar-left">
+        <h1 class="title">2048</h1>
       </div>
-    </div>
-
-    <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
-    </div>
+      
+      <!-- 中间的分数显示区域 -->
+      <div class="navbar-center">
+        <div class="scores-container">
+          <div class="score-container">
+            <span class="score-label">SCORE</span>
+            <span class="score-value">0</span>
+          </div>
+          <div class="best-container">
+            <span class="best-label">BEST</span>
+            <span class="best-value">0</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="navbar-right">
+        <a class="restart-button">New Game</a>
+      </div>
+    </nav>
 
     <div class="game-container">
       <div class="game-message">
@@ -72,16 +113,56 @@
       </div>
     </div>
 
+    <!-- 方向键指示 -->
+    <div class="arrow-keys">
+      <div class="arrow-key arrow-up">↑</div>
+      <div class="arrow-middle">
+        <div class="arrow-key arrow-left">←</div>
+        <div class="arrow-key arrow-down">↓</div>
+        <div class="arrow-key arrow-right">→</div>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <h3 class="tips-title">Pro Tips for 2048</h3>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-number">1</div>
+          <h4>Anchor Your Biggest Tile</h4>
+          <p>Pick one corner as your "home" for the highest value (working toward 2048). Always slide toward that corner first, and avoid moves that pull it away. This stable anchor keeps your path to 2048 clear.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-number">2</div>
+          <h4>Build a Descending "Snake"</h4>
+          <p>Arrange tiles in a smooth decreasing order from your chosen corner: for example, 512–256–128–64 along the top row, then continue down. This staircase layout makes merging toward 2048 predictable.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-number">3</div>
+          <h4>Stick to Two Directions</h4>
+          <p>Use just Left and Down (if your corner is bottom‑left) for most moves. Limiting yourself avoids accidental shifts that break your snake and set back your 2048 goal. Only use Up or Right to escape a deadlock.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-number">4</div>
+          <h4>Plan Merges Ahead</h4>
+          <p>Before each swipe, ask:<br><br>Will this merge help build toward 2048?<br><br>Can I keep my highest tile anchored?<br><br>Am I opening space for the next spawn?<br><br>Thinking two moves ahead prevents careless plays.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-number">5</div>
+          <h4>Keep Some Empty Space</h4>
+          <p>Aim to have 2–4 open cells. Too many empties slow momentum; too few and you'll block merges. A mostly full board with room to slide keeps you on track for that final 2048 merge.</p>
+        </div>
+      </div>
+      
+      <div class="key-takeaway">
+        <div class="takeaway-icon">🎯</div>
+        <div class="takeaway-content">
+          <strong>Key Takeaway:</strong> Anchor, snake pattern, two‑direction rule, and thoughtful merges are your blueprint for hitting 2048. Good luck!
+        </div>
+      </div>
+    </div>
+
     <p class="game-explanation">
       <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
-    </p>
-    <hr>
-    <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
     </p>
   </div>
 
@@ -95,5 +176,8 @@
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+  <footer>
+    Copyright 2025 &copy; <a href="./" style="color:#333;">PLAY 2048 ONLINE</a>. All rights reserved.
+</footer>
 </body>
 </html>

@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://play2048online.com/sitemap.xml
+
+# Allow access to important resources
+Allow: /style/
+Allow: /js/
+Allow: /meta/
+
+# Disallow files that don't need indexing
+Disallow: /*.md$
+Disallow: /*.py$
+Disallow: /*.sh$
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Crawl delay (optional)
+Crawl-delay: 1 

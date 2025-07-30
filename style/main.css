@@ -86,9 +86,8 @@ h1.title {
 .restart-button:hover {
   background: #9f8a76; }
 
-/* 游戏容器居中 */
+/* 游戏容器 */
 .game-container {
-  margin: 0 auto 30px;
   position: relative;
   padding: 15px;
   cursor: default;
@@ -105,7 +104,52 @@ h1.title {
   height: 500px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  margin: 0 auto 30px; }
+
+/* 社交媒体分享区域 */
+.social-share {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(119, 110, 101, 0.15);
+  border: 1px solid rgba(187, 173, 160, 0.2);
+  z-index: 10; }
+
+.share-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #776e65;
+  margin: 0 0 15px 0;
+  text-align: center; }
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; }
+
+.social-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.social-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+
+.social-btn svg {
+  width: 32px;
+  height: 32px; }
 
 /* 方向键指示样式 */
 .arrow-keys {
@@ -917,6 +961,28 @@ footer a:hover {
     -moz-transform: translate(202px, 202px);
     -ms-transform: translate(202px, 202px);
     transform: translate(202px, 202px); }
+
+  /* 社交分享移动端样式 */
+  .social-share {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin: 20px auto;
+    max-width: 280px; }
+  
+  .share-title {
+    font-size: 14px;
+    margin-bottom: 12px; }
+  
+  .social-buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px; }
+  
+  .social-btn svg {
+    width: 28px;
+    height: 28px; }
 
   /* Footer 移动端样式 */
   footer {

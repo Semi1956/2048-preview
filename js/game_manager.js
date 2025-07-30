@@ -88,6 +88,7 @@ GameManager.prototype.actuate = function () {
     this.storageManager.setGameState(this.serialize());
   }
 
+  // 更新游戏状态
   this.actuator.actuate(this.grid, {
     score:      this.score,
     over:       this.over,
@@ -95,6 +96,11 @@ GameManager.prototype.actuate = function () {
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated()
   });
+
+  // 更新最大值（用于分享功能）
+  if (typeof window.updateMaxTileValue === 'function') {
+    window.updateMaxTileValue();
+  }
 
 };
 

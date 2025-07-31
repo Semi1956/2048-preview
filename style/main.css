@@ -86,6 +86,22 @@ h1.title {
 .restart-button:hover {
   background: #9f8a76; }
 
+#lang-select {
+  padding: 5px;
+  border: 2px solid #bbada0;
+  border-radius: 3px;
+  background: #faf8ef;
+  color: #776e65;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+#lang-select:hover {
+  background: #eee4da;
+}
+
 /* 游戏容器 */
 .game-container {
   position: relative;

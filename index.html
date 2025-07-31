@@ -1,21 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Play 2048 Online | Free Puzzle Game to Merge Tiles & Score High</title>
-  <meta name="description" content="Play the classic 2048 puzzle game online for free. Merge tiles, challenge your skills, and aim for the 2048 tile!">
+  <!-- 动态设置语言 -->
+  <meta http-equiv="content-language" content="en">
+  <meta name="language" content="en">
+  
+  <!-- 多语言标题和描述 -->
+  <title data-i18n-meta="title">Play 2048 Online | Free Puzzle Game to Merge Tiles & Score High</title>
+  <meta name="description" data-i18n-meta="description" content="Play the classic 2048 puzzle game online for free. Merge tiles, challenge your skills, and aim for the 2048 tile!">
+  
+  <!-- 多语言链接关系 -->
   <link rel="canonical" href="https://play2048online.com/index.html">
+  <link rel="alternate" hreflang="en" href="https://play2048online.com/index.html?lang=en">
+  <link rel="alternate" hreflang="de" href="https://play2048online.com/index.html?lang=de">
+  <link rel="alternate" hreflang="ja" href="https://play2048online.com/index.html?lang=ja">
+  <link rel="alternate" hreflang="x-default" href="https://play2048online.com/index.html">
   <!-- Open Graph -->
-  <meta property="og:title" content="Play 2048 Online | Free Puzzle Game">
-  <meta property="og:description" content="Merge tiles to reach 2048 in this addictive browser-based puzzle game. No download required!">
+  <meta property="og:title" data-i18n-meta="og_title" content="Play 2048 Online | Free Puzzle Game">
+  <meta property="og:description" data-i18n-meta="og_description" content="Merge tiles to reach 2048 in this addictive browser-based puzzle game. No download required!">
   <meta property="og:image" content="https://play2048online.com/meta/2048.png">
   <meta property="og:url" content="https://play2048online.com/index.html">
   <meta property="og:type" content="game">
+  <meta property="og:locale" content="en">
+  <meta property="og:locale:alternate" content="de">
+  <meta property="og:locale:alternate" content="ja">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Play 2048 Online | Free Puzzle Game">
-  <meta name="twitter:description" content="Instantly play 2048 in your browser. Merge, strategize, and hit that 2048 tile!">
+  <meta name="twitter:title" data-i18n-meta="twitter_title" content="Play 2048 Online | Free Puzzle Game">
+  <meta name="twitter:description" data-i18n-meta="twitter_description" content="Instantly play 2048 in your browser. Merge, strategize, and hit that 2048 tile!">
   <meta name="twitter:image" content="https://play2048online.com/meta/2048.png">
 
   <!-- JSON-LD Structured Data -->
@@ -23,13 +37,57 @@
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": "2048 Online",
-    "url": "https://play2048online.com/index.html",
-    "description": "Merge numbered tiles to reach 2048 in this free, browser-based puzzle game.",
+    "name": [
+      {
+        "@language": "en",
+        "@value": "2048 Online"
+      },
+      {
+        "@language": "de",
+        "@value": "2048 Online"
+      },
+      {
+        "@language": "ja",
+        "@value": "2048 オンライン"
+      }
+    ],
+    "url": {
+      "@type": "URL",
+      "@value": "https://play2048online.com/index.html",
+      "alternateName": [
+        {
+          "@language": "en",
+          "@value": "https://play2048online.com/index.html?lang=en"
+        },
+        {
+          "@language": "de",
+          "@value": "https://play2048online.com/index.html?lang=de"
+        },
+        {
+          "@language": "ja",
+          "@value": "https://play2048online.com/index.html?lang=ja"
+        }
+      ]
+    },
+    "description": [
+      {
+        "@language": "en",
+        "@value": "Merge numbered tiles to reach 2048 in this free, browser-based puzzle game."
+      },
+      {
+        "@language": "de",
+        "@value": "Verbinde nummerierte Kacheln, um 2048 in diesem kostenlosen Browser-Puzzlespiel zu erreichen."
+      },
+      {
+        "@language": "ja",
+        "@value": "このブラウザベースの無料パズルゲームで、数字のタイルをマージして2048を目指そう。"
+      }
+    ],
     "genre": "PuzzleGame",
     "applicationCategory": "Game",
     "image": "https://play2048online.com/meta/2048.png",
-    "author": {"@type":"Organization","name":"YourBrand"}
+    "author": {"@type":"Organization","name":"YourBrand"},
+    "inLanguage": ["en", "de", "ja"]
   }
   </script>
   
@@ -50,25 +108,30 @@
     <!-- 三列导航栏布局 -->
     <nav class="navbar">
       <div class="navbar-left">
-        <h1 class="title">2048</h1>
+        <h1 class="title" data-i18n="title">2048</h1>
       </div>
       
       <!-- 中间的分数显示区域 -->
       <div class="navbar-center">
         <div class="scores-container">
           <div class="score-container">
-            <span class="score-label">SCORE</span>
+            <span class="score-label" data-i18n="score">SCORE</span>
             <span class="score-value">0</span>
           </div>
           <div class="best-container">
-            <span class="best-label">BEST</span>
+            <span class="best-label" data-i18n="best">BEST</span>
             <span class="best-value">0</span>
           </div>
         </div>
       </div>
       
       <div class="navbar-right">
-        <a class="restart-button">New Game</a>
+        <select id="lang-select" onchange="setLang(this.value)" style="margin-right: 10px;">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="ja">日本語</option>
+        </select>
+        <a class="restart-button" data-i18n="new_game">New Game</a>
       </div>
     </nav>
 
@@ -76,8 +139,8 @@
       <div class="game-message">
         <p></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
+	        <a class="keep-playing-button" data-i18n="keep_going">Keep going</a>
+          <a class="retry-button" data-i18n="try_again">Try again</a>
         </div>
       </div>
 
@@ -115,7 +178,7 @@
 
     <!-- 社交媒体分享区域 -->
     <div class="social-share">
-      <h3 class="share-title">Share Your Score</h3>
+      <h3 class="share-title" data-i18n="share_title">Share Your Score</h3>
       <div class="social-buttons">
         <button class="social-btn twitter-btn" onclick="shareToTwitter()" title="Share on Twitter">
           <svg viewBox="0 0 24 24" width="24" height="24">
@@ -158,49 +221,50 @@
     <div class="how-to-play">
       <div class="how-to-play-icon">🎮</div>
       <div class="how-to-play-content">
-        <strong>How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+        <strong data-i18n="how_to_play">How to play:</strong> <span data-i18n="how_to_play_desc">Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong></span>
       </div>
     </div>
 
     <div class="tips-section">
-      <h3 class="tips-title">Pro Tips for 2048</h3>
+      <h3 class="tips-title" data-i18n="pro_tips_title">Pro Tips for 2048</h3>
       <div class="tips-grid">
         <div class="tip-card">
           <div class="tip-number">1</div>
-          <h4>Anchor Your Biggest Tile</h4>
-          <p>Pick one corner as your "home" for the highest value (working toward 2048). Always slide toward that corner first, and avoid moves that pull it away. This stable anchor keeps your path to 2048 clear.</p>
+          <h4 data-i18n="tip1_title">Anchor Your Biggest Tile</h4>
+          <p data-i18n="tip1_desc">Pick one corner as your "home" for the highest value (working toward 2048). Always slide toward that corner first, and avoid moves that pull it away. This stable anchor keeps your path to 2048 clear.</p>
         </div>
         <div class="tip-card">
           <div class="tip-number">2</div>
-          <h4>Build a Descending "Snake"</h4>
-          <p>Arrange tiles in a smooth decreasing order from your chosen corner: for example, 512–256–128–64 along the top row, then continue down. This staircase layout makes merging toward 2048 predictable.</p>
+          <h4 data-i18n="tip2_title">Build a Descending "Snake"</h4>
+          <p data-i18n="tip2_desc">Arrange tiles in a smooth decreasing order from your chosen corner: for example, 512–256–128–64 along the top row, then continue down. This staircase layout makes merging toward 2048 predictable.</p>
         </div>
         <div class="tip-card">
           <div class="tip-number">3</div>
-          <h4>Stick to Two Directions</h4>
-          <p>Use just Left and Down (if your corner is bottom‑left) for most moves. Limiting yourself avoids accidental shifts that break your snake and set back your 2048 goal. Only use Up or Right to escape a deadlock.</p>
+          <h4 data-i18n="tip3_title">Stick to Two Directions</h4>
+          <p data-i18n="tip3_desc">Use just Left and Down (if your corner is bottom‑left) for most moves. Limiting yourself avoids accidental shifts that break your snake and set back your 2048 goal. Only use Up or Right to escape a deadlock.</p>
         </div>
         <div class="tip-card">
           <div class="tip-number">4</div>
-          <h4>Plan Merges Ahead</h4>
-          <p>Before each swipe, ask:<br><br>Will this merge help build toward 2048?<br><br>Can I keep my highest tile anchored?<br><br>Am I opening space for the next spawn?<br><br>Thinking two moves ahead prevents careless plays.</p>
+          <h4 data-i18n="tip4_title">Plan Merges Ahead</h4>
+          <p data-i18n="tip4_desc">Before each swipe, ask:<br><br>Will this merge help build toward 2048?<br><br>Can I keep my highest tile anchored?<br><br>Am I opening space for the next spawn?<br><br>Thinking two moves ahead prevents careless plays.</p>
         </div>
         <div class="tip-card">
           <div class="tip-number">5</div>
-          <h4>Keep Some Empty Space</h4>
-          <p>Aim to have 2–4 open cells. Too many empties slow momentum; too few and you'll block merges. A mostly full board with room to slide keeps you on track for that final 2048 merge.</p>
+          <h4 data-i18n="tip5_title">Keep Some Empty Space</h4>
+          <p data-i18n="tip5_desc">Aim to have 2–4 open cells. Too many empties slow momentum; too few and you'll block merges. A mostly full board with room to slide keeps you on track for that final 2048 merge.</p>
         </div>
       </div>
       
       <div class="key-takeaway">
         <div class="takeaway-icon">🎯</div>
         <div class="takeaway-content">
-          <strong>Key Takeaway:</strong> Anchor, snake pattern, two‑direction rule, and thoughtful merges are your blueprint for hitting 2048. Good luck!
+          <strong data-i18n="key_takeaway">Key Takeaway:</strong> <span data-i18n="key_takeaway_desc">Anchor, snake pattern, two‑direction rule, and thoughtful merges are your blueprint for hitting 2048. Good luck!</span>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="js/i18n.js?v=20250730193314"></script>
   <script src="js/bind_polyfill.js?v=20250730193314"></script>
   <script src="js/classlist_polyfill.js?v=20250730193314"></script>
   <script src="js/animframe_polyfill.js?v=20250730193314"></script>
@@ -270,9 +334,9 @@
       var baseText = "";
       
       if (score > 0) {
-        baseText = "I just scored " + score.toLocaleString() + " in 2048! My highest tile is " + maxTile + ". Can you beat my score? 🎮 #2048game";
+        baseText = I18N.t("share_text_with_score", {score: score.toLocaleString(), maxTile: maxTile});
       } else {
-        baseText = "Playing 2048 online! My highest tile is " + maxTile + ". Challenge yourself! 🎮 #2048game";
+        baseText = I18N.t("share_text_no_score", {maxTile: maxTile});
       }
       
       return baseText + " www.play2048online.com";
@@ -316,7 +380,7 @@
   </script>
   
   <footer>
-    Copyright 2025 &copy; <a href="./" style="color:#333;">PLAY 2048 ONLINE</a>. All rights reserved.
+    <span data-i18n="copyright">Copyright 2025 © PLAY 2048 ONLINE. All rights reserved.</span>
   </footer>
   <div style="display: none;">
     <!-- Google tag (gtag.js) -->

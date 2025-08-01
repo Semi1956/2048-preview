@@ -1,34 +1,44 @@
 (function (global) {
   const metaDict = {
     en: {
-      title: "Play 2048 Online | Free Puzzle Game to Merge Tiles & Score High",
-      description: "Play the classic 2048 puzzle game online for free. Merge tiles, challenge your skills, and aim for the 2048 tile!",
-      og_title: "Play 2048 Online | Free Puzzle Game",
-      og_description: "Merge tiles to reach 2048 in this addictive browser-based puzzle game. No download required!",
-      twitter_title: "Play 2048 Online | Free Puzzle Game",
-      twitter_description: "Instantly play 2048 in your browser. Merge, strategize, and hit that 2048 tile!"
+      title: "Play 2048 Online | Advanced Strategy Mode with High-Value Starts",
+      description: "Play 2048 online with advanced start options! Begin with high-value tiles (32-512) in your chosen corner. Perfect for experienced players who want to focus on advanced strategies. Free browser-based puzzle game.",
+      og_title: "Play 2048 Online | Advanced Strategy Puzzle Game",
+      og_description: "Play 2048 online with advanced start mode! Choose your corner, start with high-value tiles (32-512), and master advanced strategies. Free to play!",
+      twitter_title: "Play 2048 Online | Advanced Strategy Mode",
+      twitter_description: "Play 2048 online with high-value starts (32-512)! Choose your corner and master advanced strategies. Free browser game!"
     },
     de: {
-      title: "2048 Online Spielen | Kostenloses Puzzle-Spiel zum Zusammenführen von Kacheln",
-      description: "Spiele das klassische 2048-Puzzle kostenlos online. Führe Kacheln zusammen, fordere dein Geschick heraus und strebe die 2048-Kachel an!",
-      og_title: "2048 Online Spielen | Kostenloses Puzzle-Spiel",
-      og_description: "Verbinde Kacheln zu 2048 in diesem süchtig machenden browserbasiertem Puzzle-Spiel. Kein Download erforderlich!",
-      twitter_title: "2048 Online Spielen | Kostenloses Puzzle-Spiel",
-      twitter_description: "Spiele 2048 sofort in deinem Browser. Verbinde, plane strategisch und erreiche die 2048-Kachel!"
+      title: "2048 Online Spielen | Fortgeschrittener Modus mit Hochwertigem Start",
+      description: "Spiele 2048 online mit erweiterten Startoptionen! Beginne mit hochwertigen Kacheln (32-512) in deiner gewählten Ecke. Perfekt für erfahrene Spieler, die sich auf fortgeschrittene Strategien konzentrieren möchten.",
+      og_title: "2048 Online Spielen | Fortgeschrittenes Strategiespiel",
+      og_description: "Spiele 2048 online im fortgeschrittenen Modus! Wähle deine Ecke, starte mit hochwertigen Kacheln (32-512) und meistere fortgeschrittene Strategien. Kostenlos spielbar!",
+      twitter_title: "2048 Online Spielen | Fortgeschrittener Modus",
+      twitter_description: "Spiele 2048 online mit Hochwertigem Start (32-512)! Wähle deine Ecke und meistere fortgeschrittene Strategien. Kostenloses Browserspiel!"
     },
     ja: {
-      title: "2048をオンラインでプレイ | タイルをマージして高得点を目指す無料パズルゲーム",
-      description: "クラシックな2048パズルゲームを無料でプレイ。タイルをマージし、スキルを磨いて、2048タイルを目指そう！",
-      og_title: "2048をオンラインでプレイ | 無料パズルゲーム",
-      og_description: "このブラウザベースの中毒性のあるパズルゲームで、タイルをマージして2048を目指そう。ダウンロード不要！",
-      twitter_title: "2048をオンラインでプレイ | 無料パズルゲーム",
-      twitter_description: "ブラウザですぐに2048をプレイ。マージして、戦略を立てて、2048タイルを目指そう！"
+      title: "2048をオンラインでプレイ | 上級者向け高得点スタートモード",
+      description: "高度なスタートオプションで2048をオンラインプレイ！選択したコーナーに高得点タイル(32-512)を配置してスタート。上級者向けの戦略に焦点を当てた無料ブラウザゲーム。",
+      og_title: "2048をオンラインでプレイ | 上級戦略パズルゲーム",
+      og_description: "上級スタートモードで2048をプレイ！コーナーを選択し、高得点タイル(32-512)からスタート。上級戦略をマスターしよう。無料でプレイ可能！",
+      twitter_title: "2048をオンラインでプレイ | 上級者モード",
+      twitter_description: "高得点タイル(32-512)で2048をプレイ！コーナーを選んで上級戦略をマスター。無料ブラウザゲーム！"
     }
   };
 
   const dict = {
     en: {
       title: "2048",
+      new_game_settings: "New Game Settings",
+      start_number: "Starting Number",
+      corner_position: "Corner Position",
+      top_left: "Top Left",
+      top_right: "Top Right",
+      bottom_left: "Bottom Left",
+      bottom_right: "Bottom Right",
+      cancel: "Cancel",
+      start: "Start",
+      please_select_corner: "Please select a corner position!",
       score: "SCORE",
       best: "BEST",
       new_game: "New Game",
@@ -58,6 +68,16 @@
     },
     de: {
       title: "2048",
+      new_game_settings: "Neues Spiel Einstellungen",
+      start_number: "Startnummer",
+      corner_position: "Eckposition",
+      top_left: "Oben Links",
+      top_right: "Oben Rechts",
+      bottom_left: "Unten Links",
+      bottom_right: "Unten Rechts",
+      cancel: "Abbrechen",
+      start: "Start",
+      please_select_corner: "Bitte wählen Sie eine Eckposition!",
       score: "PUNKTE",
       best: "BESTE",
       new_game: "Neues Spiel",
@@ -87,6 +107,16 @@
     },
     ja: {
       title: "2048",
+      new_game_settings: "新規ゲーム設定",
+      start_number: "開始数値",
+      corner_position: "コーナー位置",
+      top_left: "左上",
+      top_right: "右上",
+      bottom_left: "左下",
+      bottom_right: "右下",
+      cancel: "キャンセル",
+      start: "開始",
+      please_select_corner: "コーナー位置を選択してください！",
       score: "スコア",
       best: "ベスト",
       new_game: "ニューゲーム",

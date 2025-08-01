@@ -1014,3 +1014,122 @@ footer a:hover {
     font-size: 13px;
     width: calc(100% + 30px); }
 }
+
+/* 新游戏设置对话框 */
+.dialog {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog.show {
+  display: flex;
+}
+
+.dialog-content {
+  background: #faf8ef;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+}
+
+.dialog-content h3 {
+  margin: 0 0 20px 0;
+  color: #776e65;
+  font-size: 24px;
+  text-align: center;
+}
+
+.dialog-body {
+  margin-bottom: 20px;
+}
+
+.setting-group {
+  margin-bottom: 15px;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #776e65;
+  font-weight: bold;
+}
+
+.setting-group select {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #bbada0;
+  border-radius: 6px;
+  background: #faf8ef;
+  color: #776e65;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.corner-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.corner-btn {
+  padding: 10px;
+  border: 2px solid #bbada0;
+  border-radius: 6px;
+  background: #faf8ef;
+  color: #776e65;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.corner-btn:hover {
+  background: #eee4da;
+}
+
+.corner-btn.selected {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border-color: #8f7a66;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dialog-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancel-btn {
+  background: #eee4da;
+  color: #776e65;
+}
+
+.cancel-btn:hover {
+  background: #ede0c8;
+}
+
+.start-btn {
+  background: #8f7a66;
+  color: #f9f6f2;
+}
+
+.start-btn:hover {
+  background: #9f8a76;
+}

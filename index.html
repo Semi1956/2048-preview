@@ -40,15 +40,15 @@
     "name": [
       {
         "@language": "en",
-        "@value": "2048 Online"
+        "@value": "Play 2048 Online - Advanced Strategy Puzzle Game"
       },
       {
         "@language": "de",
-        "@value": "2048 Online"
+        "@value": "2048 Online Spielen - Fortgeschrittenes Strategiespiel"
       },
       {
         "@language": "ja",
-        "@value": "2048 オンライン"
+        "@value": "2048をオンラインでプレイ - 上級戦略パズルゲーム"
       }
     ],
     "url": {
@@ -72,25 +72,62 @@
     "description": [
       {
         "@language": "en",
-        "@value": "Merge numbered tiles to reach 2048 in this free, browser-based puzzle game."
+        "@value": "Play 2048 online with advanced start options! Begin with high-value tiles (32-512) in your chosen corner, perfect for experienced players who want to focus on advanced strategies. Free browser-based puzzle game with multilingual support."
       },
       {
         "@language": "de",
-        "@value": "Verbinde nummerierte Kacheln, um 2048 in diesem kostenlosen Browser-Puzzlespiel zu erreichen."
+        "@value": "Spielen Sie 2048 online mit erweiterten Startoptionen! Beginnen Sie mit hochwertigen Kacheln (32-512) in Ihrer gewählten Ecke, ideal für erfahrene Spieler, die sich auf fortgeschrittene Strategien konzentrieren möchten. Kostenloses browserbasiertes Puzzlespiel mit mehrsprachiger Unterstützung."
       },
       {
         "@language": "ja",
-        "@value": "このブラウザベースの無料パズルゲームで、数字のタイルをマージして2048を目指そう。"
+        "@value": "高度な開始オプションで2048をオンラインプレイ！選択したコーナーに高得点タイル(32-512)を配置してスタート。上級者向けの戦略に焦点を当てたブラウザベースの無料パズルゲーム。多言語対応。"
       }
     ],
-    "genre": "PuzzleGame",
+    "genre": ["PuzzleGame", "StrategyGame"],
     "applicationCategory": "Game",
     "image": "https://play2048online.com/meta/2048.png",
     "author": {"@type":"Organization","name":"YourBrand"},
-    "inLanguage": ["en", "de", "ja"]
+    "inLanguage": ["en", "de", "ja"],
+    "gameFeature": [
+      {
+        "@type": "GamePlayMode",
+        "name": "Advanced Start Mode",
+        "description": "Start with high-value tiles (32-512) in chosen corner positions for advanced gameplay"
+      },
+      {
+        "@type": "GamePlayMode",
+        "name": "Strategic Corner Placement",
+        "description": "Choose your preferred corner for optimal strategy in Play 2048 Online"
+      }
+    ],
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Experienced Players",
+      "description": "Perfect for players who want to skip the early game and focus on advanced 2048 strategies"
+    },
+    "gameDifficulty": "Advanced",
+    "gamePlatform": "Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "http://schema.org/InStock"
+    },
+    "keywords": [
+      "play 2048 online",
+      "2048 game",
+      "advanced 2048",
+      "2048 strategy",
+      "free puzzle game",
+      "online strategy game",
+      "browser game",
+      "multilingual 2048",
+      "advanced start mode",
+      "corner strategy"
+    ]
   }
   </script>
-  
+  <script src="https://analytics.ahrefs.com/analytics.js" data-key="PQoz9dwvClhduQYouMIvhQ" async></script>
   <link href="style/main.css?v=20250731180523" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
@@ -131,7 +168,39 @@
           <option value="de">Deutsch</option>
           <option value="ja">日本語</option>
         </select>
-        <a class="restart-button" data-i18n="new_game">New Game</a>
+        <a class="restart-button" data-i18n="new_game" onclick="showNewGameDialog()">New Game</a>
+      </div>
+
+      <!-- 新游戏设置对话框 -->
+      <div id="new-game-dialog" class="dialog">
+        <div class="dialog-content">
+          <h3 data-i18n="new_game_settings">New Game Settings</h3>
+          <div class="dialog-body">
+            <div class="setting-group">
+              <label data-i18n="start_number">Starting Number:</label>
+              <select id="start-number">
+                <option value="32">32</option>
+                <option value="64">64</option>
+                <option value="128">128</option>
+                <option value="256">256</option>
+                <option value="512">512</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <label data-i18n="corner_position">Corner Position:</label>
+              <div class="corner-selector">
+                <button class="corner-btn" data-corner="0,0" data-i18n="top_left">Top Left</button>
+                <button class="corner-btn" data-corner="0,3" data-i18n="top_right">Top Right</button>
+                <button class="corner-btn" data-corner="3,0" data-i18n="bottom_left">Bottom Left</button>
+                <button class="corner-btn" data-corner="3,3" data-i18n="bottom_right">Bottom Right</button>
+              </div>
+            </div>
+          </div>
+          <div class="dialog-footer">
+            <button class="dialog-btn cancel-btn" onclick="hideNewGameDialog()" data-i18n="cancel">Cancel</button>
+            <button class="dialog-btn start-btn" onclick="startNewGame()" data-i18n="start">Start</button>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -276,6 +345,51 @@
   <script src="js/game_manager.js?v=20250731180523"></script>
   <script src="js/application.js?v=20250731180523"></script>
   
+  <!-- 新游戏对话框控制 -->
+  <script>
+    let selectedCorner = null;
+
+    function showNewGameDialog() {
+      document.getElementById('new-game-dialog').classList.add('show');
+    }
+
+    function hideNewGameDialog() {
+      document.getElementById('new-game-dialog').classList.remove('show');
+    }
+
+    // 选择角落位置
+    document.querySelectorAll('.corner-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // 移除其他按钮的选中状态
+        document.querySelectorAll('.corner-btn').forEach(b => b.classList.remove('selected'));
+        // 添加当前按钮的选中状态
+        this.classList.add('selected');
+        // 保存选中的角落坐标
+        selectedCorner = this.getAttribute('data-corner').split(',').map(Number);
+      });
+    });
+
+    function startNewGame() {
+      if (!selectedCorner) {
+        alert(I18N.t('please_select_corner'));
+        return;
+      }
+
+      const startNumber = document.getElementById('start-number').value;
+      const cornerPosition = { x: selectedCorner[0], y: selectedCorner[1] };
+
+      // 重启游戏
+      window.gameManager.restart(startNumber, cornerPosition);
+      
+      // 隐藏对话框
+      hideNewGameDialog();
+      
+      // 重置选择状态
+      selectedCorner = null;
+      document.querySelectorAll('.corner-btn').forEach(b => b.classList.remove('selected'));
+    }
+  </script>
+
   <!-- 社交媒体分享功能 -->
   <script>
     // 缓存最大值
@@ -392,7 +506,7 @@
 
       gtag('config', 'G-B30V9ME43C');
     </script>
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="PQoz9dwvClhduQYouMIvhQ" async></script>
+    
   </div>
 </body>
 </html>

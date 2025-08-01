@@ -14,10 +14,10 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 }
 
 // Restart the game
-GameManager.prototype.restart = function () {
+GameManager.prototype.restart = function (startNumber, cornerPosition) {
   this.storageManager.clearGameState();
   this.actuator.continueGame(); // Clear the game won/lost message
-  this.setup();
+  this.setup(startNumber, cornerPosition);
 };
 
 // Keep playing after winning (allows going over 2048)
@@ -32,11 +32,11 @@ GameManager.prototype.isGameTerminated = function () {
 };
 
 // Set up the game
-GameManager.prototype.setup = function () {
+GameManager.prototype.setup = function (startNumber, cornerPosition) {
   var previousState = this.storageManager.getGameState();
 
   // Reload the game from a previous game if present
-  if (previousState) {
+  if (previousState && !startNumber && !cornerPosition) {
     this.grid        = new Grid(previousState.grid.size,
                                 previousState.grid.cells); // Reload grid
     this.score       = previousState.score;
@@ -51,7 +51,7 @@ GameManager.prototype.setup = function () {
     this.keepPlaying = false;
 
     // Add the initial tiles
-    this.addStartTiles();
+    this.addStartTiles(startNumber, cornerPosition);
   }
 
   // Update the actuator
@@ -59,9 +59,21 @@ GameManager.prototype.setup = function () {
 };
 
 // Set up the initial tiles to start the game with
-GameManager.prototype.addStartTiles = function () {
-  for (var i = 0; i < this.startTiles; i++) {
-    this.addRandomTile();
+GameManager.prototype.addStartTiles = function (startNumber, cornerPosition) {
+  if (startNumber && cornerPosition) {
+    // 在指定角落添加指定数字
+    var tile = new Tile(cornerPosition, parseInt(startNumber));
+    this.grid.insertTile(tile);
+    
+    // 默认行为：添加两个随机数字
+    for (var i = 0; i < this.startTiles; i++) {
+      this.addRandomTile();
+    }
+  } else {
+    // 默认行为：添加两个随机数字
+    for (var i = 0; i < this.startTiles; i++) {
+      this.addRandomTile();
+    }
   }
 };
 

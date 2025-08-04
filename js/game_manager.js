@@ -65,9 +65,29 @@ GameManager.prototype.addStartTiles = function (startNumber, cornerPosition) {
     var tile = new Tile(cornerPosition, parseInt(startNumber));
     this.grid.insertTile(tile);
     
-    // 默认行为：添加两个随机数字
-    for (var i = 0; i < this.startTiles; i++) {
-      this.addRandomTile();
+    // 根据起始数字决定额外添加的数字
+    var additionalValue;
+    var startNum = parseInt(startNumber);
+    if (startNum <= 16) {
+      // 如果起始数字是2-16，额外添加两个2
+      additionalValue = 2;
+    } else if (startNum === 32) {
+      // 32：额外添加两个2
+      additionalValue = 2;
+    } else if (startNum === 64) {
+      // 64：额外添加两个4
+      additionalValue = 4;
+    } else {
+      // 128、256、512：都额外添加两个4
+      additionalValue = 4;
+    }
+    
+    // 添加两个额外的数字
+    for (var i = 0; i < 2; i++) {
+      if (this.grid.cellsAvailable()) {
+        var tile = new Tile(this.grid.randomAvailableCell(), additionalValue);
+        this.grid.insertTile(tile);
+      }
     }
   } else {
     // 默认行为：添加两个随机数字

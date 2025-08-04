@@ -128,7 +128,7 @@
   }
   </script>
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="PQoz9dwvClhduQYouMIvhQ" async></script>
-  <link href="style/main.css?v=20250801191535" rel="stylesheet" type="text/css">
+  <link href="style/main.css?v=20250804093234" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
@@ -163,12 +163,12 @@
       </div>
       
       <div class="navbar-right">
-        <select id="lang-select" onchange="setLang(this.value)" style="margin-right: 10px;">
+        <select id="lang-select" onchange="setLang(this.value)">
           <option value="en">English</option>
           <option value="de">Deutsch</option>
           <option value="ja">日本語</option>
         </select>
-        <a class="restart-button" data-i18n="new_game" onclick="showNewGameDialog()">New Game</a>
+        <a class="restart-button" data-i18n="new_game" onclick="showNewGameDialog()" ontouchend="showNewGameDialog()">New Game</a>
       </div>
 
       <!-- 新游戏设置对话框 -->
@@ -179,6 +179,10 @@
             <div class="setting-group">
               <label data-i18n="start_number">Starting Number:</label>
               <select id="start-number">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
                 <option value="32">32</option>
                 <option value="64">64</option>
                 <option value="128">128</option>
@@ -333,39 +337,79 @@
     </div>
   </div>
 
-  <script src="js/i18n.js?v=20250801191535"></script>
-  <script src="js/bind_polyfill.js?v=20250801191535"></script>
-  <script src="js/classlist_polyfill.js?v=20250801191535"></script>
-  <script src="js/animframe_polyfill.js?v=20250801191535"></script>
-  <script src="js/keyboard_input_manager.js?v=20250801191535"></script>
-  <script src="js/html_actuator.js?v=20250801191535"></script>
-  <script src="js/grid.js?v=20250801191535"></script>
-  <script src="js/tile.js?v=20250801191535"></script>
-  <script src="js/local_storage_manager.js?v=20250801191535"></script>
-  <script src="js/game_manager.js?v=20250801191535"></script>
-  <script src="js/application.js?v=20250801191535"></script>
+  <script src="js/i18n.js?v=20250804093234"></script>
+  <script src="js/bind_polyfill.js?v=20250804093234"></script>
+  <script src="js/classlist_polyfill.js?v=20250804093234"></script>
+  <script src="js/animframe_polyfill.js?v=20250804093234"></script>
+  <script src="js/keyboard_input_manager.js?v=20250804093234"></script>
+  <script src="js/html_actuator.js?v=20250804093234"></script>
+  <script src="js/grid.js?v=20250804093234"></script>
+  <script src="js/tile.js?v=20250804093234"></script>
+  <script src="js/local_storage_manager.js?v=20250804093234"></script>
+  <script src="js/game_manager.js?v=20250804093234"></script>
+  <script src="js/application.js?v=20250804093234"></script>
   
   <!-- 新游戏对话框控制 -->
   <script>
     let selectedCorner = null;
 
     function showNewGameDialog() {
-      document.getElementById('new-game-dialog').classList.add('show');
+      console.log('showNewGameDialog called'); // 调试信息
+      const dialog = document.getElementById('new-game-dialog');
+      console.log('dialog element:', dialog); // 调试信息
+      
+      if (!dialog) {
+        console.error('Dialog element not found!');
+        return;
+      }
+      
+      dialog.classList.add('show');
+      console.log('Dialog classes after adding show:', dialog.className); // 调试信息
+      
+      // 在移动端，阻止对话框以外的触摸滚动
+      if ('ontouchstart' in window) {
+        document.body.style.overflow = 'hidden';
+        
+        // 点击对话框外部关闭
+        dialog.addEventListener('touchstart', function(e) {
+          if (e.target === dialog) {
+            hideNewGameDialog();
+          }
+        }, { once: true });
+      }
     }
 
     function hideNewGameDialog() {
       document.getElementById('new-game-dialog').classList.remove('show');
+      document.body.style.overflow = '';
     }
 
     // 选择角落位置
     document.querySelectorAll('.corner-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
+      function handleSelection() {
         // 移除其他按钮的选中状态
         document.querySelectorAll('.corner-btn').forEach(b => b.classList.remove('selected'));
         // 添加当前按钮的选中状态
-        this.classList.add('selected');
+        btn.classList.add('selected');
         // 保存选中的角落坐标
-        selectedCorner = this.getAttribute('data-corner').split(',').map(Number);
+        selectedCorner = btn.getAttribute('data-corner').split(',').map(Number);
+      }
+
+      // 添加点击事件
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleSelection();
+      });
+      
+      // 添加触摸事件支持
+      btn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        handleSelection();
+      });
+      
+      // 防止触摸时的默认行为
+      btn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
       });
     });
 
@@ -377,6 +421,10 @@
 
       const startNumber = document.getElementById('start-number').value;
       const cornerPosition = { x: selectedCorner[0], y: selectedCorner[1] };
+      
+      console.log('Selected corner array:', selectedCorner);
+      console.log('Corner position object:', cornerPosition);
+      console.log('Start number:', startNumber);
 
       // 重启游戏
       window.gameManager.restart(startNumber, cornerPosition);

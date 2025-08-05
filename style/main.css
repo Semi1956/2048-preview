@@ -897,6 +897,33 @@ footer a:hover {
   .tips-section {
     margin: 30px auto; }
   
+  /* 游戏结束消息移动端样式 */
+  .game-container .game-message p {
+    font-size: 40px;
+    height: auto;
+    line-height: 1.2;
+    margin-top: 120px;
+    padding: 0 10px; }
+  
+  .game-container .game-message .lower {
+    margin-top: 40px; }
+  
+  .game-container .game-message a {
+    display: block;
+    margin: 8px auto;
+    padding: 12px 20px;
+    font-size: 16px;
+    height: auto;
+    line-height: 1.2;
+    min-height: 44px;
+    width: 200px;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; }
+  
+  .game-container .game-message a:active {
+    transform: scale(0.95); }
+
   .tips-title {
     font-size: 26px;
     margin-bottom: 25px; }

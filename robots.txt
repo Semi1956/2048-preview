@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://play2048online.com/sitemap.xml
+Sitemap: https://www.play2048online.com/sitemap.xml
 
 # Allow access to important resources
 Allow: /style/

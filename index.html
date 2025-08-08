@@ -138,7 +138,7 @@
   }
   </script>
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="PQoz9dwvClhduQYouMIvhQ" async></script>
-  <link href="style/main.css?v=20250806154600" rel="stylesheet" type="text/css">
+  <link href="style/main.css?v=20250806170458" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
@@ -179,6 +179,10 @@
           <option value="ja">日本語</option>
           <option value="ru" selected>Русский</option>
         </select>
+        <button id="record-button" class="record-button" onclick="toggleRecording()" ontouchend="toggleRecording()">
+          <span class="record-icon">🎥</span>
+          <span class="record-text" data-i18n="start_recording">录制</span>
+        </button>
         <a class="restart-button" data-i18n="new_game" onclick="showNewGameDialog()" ontouchend="showNewGameDialog()">New Game</a>
       </div>
 
@@ -214,6 +218,62 @@
           <div class="dialog-footer">
             <button class="dialog-btn cancel-btn" onclick="hideNewGameDialog()" data-i18n="cancel">Cancel</button>
             <button class="dialog-btn start-btn" onclick="startNewGame()" data-i18n="start">Start</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 视频分享对话框 -->
+      <div id="share-dialog" class="dialog">
+        <div class="dialog-content">
+          <h3 data-i18n="share_video">分享你的游戏视频</h3>
+          <div class="dialog-body">
+            <div class="share-preview">
+              <div class="video-info">
+                <span class="video-icon">🎬</span>
+                <div class="video-details">
+                  <div class="video-title" data-i18n="video_ready">视频已准备就绪！</div>
+                  <div class="video-subtitle" data-i18n="share_your_skills">展示你的2048技巧</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="share-text-section">
+              <label data-i18n="share_caption">分享文案：</label>
+              <textarea id="share-caption" rows="3" placeholder="自动生成的分享文案..."></textarea>
+            </div>
+            
+            <div class="social-buttons">
+              <button class="social-btn youtube-btn" onclick="shareToYouTube()">
+                <span class="social-icon">📺</span>
+                <span data-i18n="share_youtube">YouTube</span>
+              </button>
+              <button class="social-btn twitter-btn" onclick="shareToTwitter()">
+                <span class="social-icon">🐦</span>
+                <span data-i18n="share_twitter">Twitter/X</span>
+              </button>
+              <button class="social-btn tiktok-btn" onclick="shareToTikTok()">
+                <span class="social-icon">🎵</span>
+                <span data-i18n="share_tiktok">TikTok</span>
+              </button>
+              <button class="social-btn instagram-btn" onclick="shareToInstagram()">
+                <span class="social-icon">📷</span>
+                <span data-i18n="share_instagram">Instagram</span>
+              </button>
+            </div>
+            
+            <div class="share-actions">
+              <button class="action-btn download-btn" onclick="downloadVideoOnly()">
+                <span class="action-icon">💾</span>
+                <span data-i18n="download_only">仅下载</span>
+              </button>
+              <button class="action-btn copy-btn" onclick="copyShareText()">
+                <span class="action-icon">📋</span>
+                <span data-i18n="copy_caption">复制文案</span>
+              </button>
+            </div>
+          </div>
+          <div class="dialog-footer">
+            <button class="dialog-btn cancel-btn" onclick="hideShareDialog()" data-i18n="close">关闭</button>
           </div>
         </div>
       </div>
@@ -348,17 +408,20 @@
     </div>
   </div>
 
-  <script src="js/i18n.js?v=20250806154600"></script>
-  <script src="js/bind_polyfill.js?v=20250806154600"></script>
-  <script src="js/classlist_polyfill.js?v=20250806154600"></script>
-  <script src="js/animframe_polyfill.js?v=20250806154600"></script>
-  <script src="js/keyboard_input_manager.js?v=20250806154600"></script>
-  <script src="js/html_actuator.js?v=20250806154600"></script>
-  <script src="js/grid.js?v=20250806154600"></script>
-  <script src="js/tile.js?v=20250806154600"></script>
-  <script src="js/local_storage_manager.js?v=20250806154600"></script>
-  <script src="js/game_manager.js?v=20250806154600"></script>
-  <script src="js/application.js?v=20250806154600"></script>
+  <!-- html2canvas库用于游戏区域录制 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="js/i18n.js?v=20250806170458"></script>
+  <script src="js/bind_polyfill.js?v=20250806170458"></script>
+  <script src="js/classlist_polyfill.js?v=20250806170458"></script>
+  <script src="js/animframe_polyfill.js?v=20250806170458"></script>
+  <script src="js/keyboard_input_manager.js?v=20250806170458"></script>
+  <script src="js/html_actuator.js?v=20250806170458"></script>
+  <script src="js/grid.js?v=20250806170458"></script>
+  <script src="js/tile.js?v=20250806170458"></script>
+  <script src="js/local_storage_manager.js?v=20250806170458"></script>
+  <script src="js/game_manager.js?v=20250806170458"></script>
+  <script src="js/application.js?v=20250806170458"></script>
   
   <!-- 新游戏对话框控制 -->
   <script>
@@ -550,6 +613,515 @@
       var url = "https://pinterest.com/pin/create/button/?url=" + encodeURIComponent("https://www.play2048online.com") + "&description=" + encodeURIComponent(text);
       window.open(url, '_blank', 'width=750,height=320');
     }
+
+    // 游戏区域录制功能
+    let mediaRecorder;
+    let recordedChunks = [];
+    let isRecording = false;
+    let recordingCanvas;
+    let recordingContext;
+    let recordingStream;
+    let recordingInterval;
+
+
+
+    async function toggleRecording() {
+      const recordButton = document.getElementById('record-button');
+      const recordIcon = recordButton.querySelector('.record-icon');
+      const recordText = recordButton.querySelector('.record-text');
+      
+      if (!isRecording) {
+        try {
+          // 开始录制
+          await startRecording();
+          isRecording = true;
+          recordIcon.textContent = '⏹️';
+          recordText.textContent = I18N.t('stop_recording');
+          recordButton.classList.add('recording');
+        } catch (error) {
+          console.error('无法开始录制:', error);
+          alert(I18N.t('recording_error'));
+        }
+      } else {
+        // 停止录制
+        stopRecording();
+        isRecording = false;
+        recordIcon.textContent = '🎥';
+        recordText.textContent = I18N.t('start_recording');
+        recordButton.classList.remove('recording');
+      }
+    }
+
+    async function startRecording() {
+      recordedChunks = [];
+      
+      try {
+        // 获取游戏容器元素
+        const gameContainer = document.querySelector('.game-container');
+        if (!gameContainer) {
+          throw new Error('Game container not found');
+        }
+
+        // 获取游戏容器的尺寸和位置
+        const containerRect = gameContainer.getBoundingClientRect();
+        const containerStyle = window.getComputedStyle(gameContainer);
+        
+        // 计算实际的内容区域（减去padding和border）
+        const paddingLeft = parseInt(containerStyle.paddingLeft) || 0;
+        const paddingTop = parseInt(containerStyle.paddingTop) || 0;
+        const paddingRight = parseInt(containerStyle.paddingRight) || 0;
+        const paddingBottom = parseInt(containerStyle.paddingBottom) || 0;
+        const borderLeft = parseInt(containerStyle.borderLeftWidth) || 0;
+        const borderTop = parseInt(containerStyle.borderTopWidth) || 0;
+        const borderRight = parseInt(containerStyle.borderRightWidth) || 0;
+        const borderBottom = parseInt(containerStyle.borderBottomWidth) || 0;
+
+        // 计算录制区域的实际尺寸
+        const recordWidth = containerRect.width - paddingLeft - paddingRight - borderLeft - borderRight;
+        const recordHeight = containerRect.height - paddingTop - paddingBottom - borderTop - borderBottom;
+
+        // 创建用于录制的canvas
+        recordingCanvas = document.createElement('canvas');
+        recordingCanvas.width = recordWidth;
+        recordingCanvas.height = recordHeight;
+        recordingContext = recordingCanvas.getContext('2d');
+
+        // 设置高质量渲染
+        recordingContext.imageSmoothingEnabled = true;
+        recordingContext.imageSmoothingQuality = 'high';
+
+        // 创建视频流
+        recordingStream = recordingCanvas.captureStream(30); // 30 FPS
+
+        // 创建MediaRecorder
+        const options = {
+          mimeType: 'video/webm;codecs=vp9'
+        };
+        
+        // 检查浏览器支持的编码格式
+        if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+          options.mimeType = 'video/webm;codecs=vp8';
+          if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+            options.mimeType = 'video/webm';
+            if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+              options.mimeType = '';
+            }
+          }
+        }
+
+        mediaRecorder = new MediaRecorder(recordingStream, options);
+        
+        mediaRecorder.ondataavailable = function(event) {
+          if (event.data.size > 0) {
+            recordedChunks.push(event.data);
+          }
+        };
+        
+        mediaRecorder.onstop = function() {
+          saveRecording();
+          // 清理资源
+          if (recordingInterval) {
+            cancelAnimationFrame(recordingInterval);
+            recordingInterval = null;
+          }
+          recordingCanvas = null;
+          recordingContext = null;
+        };
+
+        // 开始录制
+        mediaRecorder.start(1000); // 每秒收集一次数据
+        
+        // 开始捕获游戏区域
+        startGameAreaCapture(gameContainer, paddingLeft + borderLeft, paddingTop + borderTop);
+        
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    function startGameAreaCapture(gameContainer, offsetX, offsetY) {
+      let frameCount = 0;
+      let lastFrameTime = 0;
+      const targetFPS = 30;
+      const frameInterval = 1000 / targetFPS;
+      
+      function captureFrame(currentTime) {
+        if (!isRecording || !recordingContext) return;
+
+        // 控制帧率，确保稳定的30FPS
+        if (currentTime - lastFrameTime < frameInterval) {
+          recordingInterval = requestAnimationFrame(captureFrame);
+          return;
+        }
+        
+        lastFrameTime = currentTime;
+        frameCount++;
+
+        try {
+          // 优先使用原生Canvas绘制，避免html2canvas的异步问题
+          captureGameAreaDirect(gameContainer);
+          
+          // 继续下一帧
+          if (isRecording) {
+            recordingInterval = requestAnimationFrame(captureFrame);
+          }
+        } catch (error) {
+          console.warn('Frame capture error:', error);
+          if (isRecording) {
+            recordingInterval = requestAnimationFrame(captureFrame);
+          }
+        }
+      }
+
+      // 开始录制循环
+      recordingInterval = requestAnimationFrame(captureFrame);
+    }
+
+    function captureGameAreaDirect(gameContainer) {
+      // 优化的游戏区域绘制，减少闪烁
+      if (!recordingContext || !isRecording) return;
+
+      const containerRect = gameContainer.getBoundingClientRect();
+      
+      // 获取游戏容器的实际背景颜色
+      const containerStyle = window.getComputedStyle(gameContainer);
+      const containerBgColor = containerStyle.backgroundColor || '#faf8ef';
+      
+      // 清空canvas并设置背景
+      recordingContext.fillStyle = containerBgColor;
+      recordingContext.fillRect(0, 0, recordingCanvas.width, recordingCanvas.height);
+
+      // 先绘制网格背景
+      const gridCells = gameContainer.querySelectorAll('.grid-cell');
+      
+      gridCells.forEach(cell => {
+        const rect = cell.getBoundingClientRect();
+        const x = rect.left - containerRect.left;
+        const y = rect.top - containerRect.top;
+        
+        // 获取网格单元格的实际样式
+        const cellStyle = window.getComputedStyle(cell);
+        const cellBgColor = cellStyle.backgroundColor;
+        const borderRadius = parseInt(cellStyle.borderRadius) || 8;
+        
+        // 绘制网格单元格
+        recordingContext.fillStyle = cellBgColor;
+        
+        // 绘制圆角矩形
+        if (typeof recordingContext.roundRect === 'function') {
+          recordingContext.beginPath();
+          recordingContext.roundRect(x, y, rect.width, rect.height, borderRadius);
+          recordingContext.fill();
+        } else {
+          recordingContext.fillRect(x, y, rect.width, rect.height);
+        }
+      });
+
+      // 再绘制所有瓦片
+      const tiles = gameContainer.querySelectorAll('.tile');
+      const tileArray = Array.from(tiles);
+      
+      // 按z-index排序，确保正确的层级
+      tileArray.sort((a, b) => {
+        const aZ = parseInt(window.getComputedStyle(a).zIndex) || 0;
+        const bZ = parseInt(window.getComputedStyle(b).zIndex) || 0;
+        return aZ - bZ;
+      });
+
+      tileArray.forEach(tile => {
+        const rect = tile.getBoundingClientRect();
+        const style = window.getComputedStyle(tile);
+        
+        // 跳过不可见的瓦片
+        if (style.opacity === '0' || style.visibility === 'hidden' || style.display === 'none') {
+          return;
+        }
+        
+        const x = rect.left - containerRect.left;
+        const y = rect.top - containerRect.top;
+        
+        // 获取瓦片实际样式
+        const text = tile.textContent.trim();
+        const opacity = parseFloat(style.opacity) || 1;
+        
+        // 查找.tile-inner元素获取真实样式
+        const tileInner = tile.querySelector('.tile-inner');
+        if (!tileInner) return; // 如果没有.tile-inner，跳过
+        
+        const innerStyle = window.getComputedStyle(tileInner);
+        const bgColor = innerStyle.backgroundColor;
+        const color = innerStyle.color;
+        const fontSize = parseInt(innerStyle.fontSize) || 55;
+
+        // 设置透明度
+        recordingContext.globalAlpha = opacity;
+
+        // 绘制瓦片背景（带圆角效果）
+        recordingContext.fillStyle = bgColor;
+        const borderRadius = parseInt(innerStyle.borderRadius) || 6;
+        
+        // 检查roundRect支持，不支持则使用普通矩形
+        if (typeof recordingContext.roundRect === 'function') {
+          recordingContext.beginPath();
+          recordingContext.roundRect(x, y, rect.width, rect.height, borderRadius);
+          recordingContext.fill();
+        } else {
+          // 降级方案：使用普通矩形
+          recordingContext.fillRect(x, y, rect.width, rect.height);
+        }
+
+        // 绘制瓦片文本
+        if (text && text !== '') {
+          recordingContext.fillStyle = color;
+          recordingContext.font = `bold ${fontSize}px "Clear Sans", "Helvetica Neue", Arial, sans-serif`;
+          recordingContext.textAlign = 'center';
+          recordingContext.textBaseline = 'middle';
+          
+          // 添加文本阴影效果（对于高数值瓦片）
+          if (parseInt(text) >= 8) {
+            recordingContext.shadowColor = 'rgba(0,0,0,0.1)';
+            recordingContext.shadowOffsetX = 1;
+            recordingContext.shadowOffsetY = 1;
+            recordingContext.shadowBlur = 2;
+          }
+          
+          recordingContext.fillText(text, x + rect.width/2, y + rect.height/2);
+          
+          // 清除阴影
+          recordingContext.shadowColor = 'transparent';
+        }
+
+        // 重置透明度
+        recordingContext.globalAlpha = 1;
+      });
+    }
+
+    function stopRecording() {
+      if (recordingInterval) {
+        cancelAnimationFrame(recordingInterval);
+        recordingInterval = null;
+      }
+      
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+      
+      if (recordingStream) {
+        recordingStream.getTracks().forEach(track => {
+          track.stop();
+        });
+      }
+    }
+
+    function saveRecording() {
+      if (recordedChunks.length === 0) {
+        alert(I18N.t('no_recording_data'));
+        return;
+      }
+      
+      // 创建视频blob
+      const blob = new Blob(recordedChunks, {
+        type: 'video/webm'
+      });
+      
+      // 创建下载链接
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      
+      // 生成文件名
+      const now = new Date();
+      const timestamp = now.getFullYear() + 
+        String(now.getMonth() + 1).padStart(2, '0') + 
+        String(now.getDate()).padStart(2, '0') + '_' +
+        String(now.getHours()).padStart(2, '0') + 
+        String(now.getMinutes()).padStart(2, '0') + 
+        String(now.getSeconds()).padStart(2, '0');
+      
+      a.download = `2048_game_${timestamp}.webm`;
+      
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      // 清理资源
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 100);
+      
+      // 清空录制数据
+      recordedChunks = [];
+      
+      // 显示分享对话框
+      showShareDialog(blob, `2048_game_${timestamp}.webm`);
+    }
+
+    // 分享对话框功能
+    let currentVideoBlob = null;
+    let currentVideoFilename = '';
+
+    function showShareDialog(blob, filename) {
+      currentVideoBlob = blob;
+      currentVideoFilename = filename;
+      
+      const shareDialog = document.getElementById('share-dialog');
+      const shareCaption = document.getElementById('share-caption');
+      
+      // 生成分享文案
+      const caption = generateVideoShareText();
+      shareCaption.value = caption;
+      
+      shareDialog.classList.add('show');
+    }
+
+    function hideShareDialog() {
+      const shareDialog = document.getElementById('share-dialog');
+      shareDialog.classList.remove('show');
+      
+      // 清理资源
+      if (currentVideoBlob) {
+        currentVideoBlob = null;
+        currentVideoFilename = '';
+      }
+    }
+
+    function generateVideoShareText() {
+      const currentScore = getCurrentScore();
+      const maxTile = getMaxTile();
+      const lang = I18N.lang || 'ru';
+      
+      const templates = {
+        en: [
+          `🎮 Just recorded my 2048 gameplay! Scored ${currentScore.toLocaleString()} points with max tile ${maxTile}! 🚀\n\n#2048Game #PuzzleGame #Gaming #SkillShow`,
+          `🧠 Check out my 2048 strategy in action! Reached ${maxTile} tile with ${currentScore.toLocaleString()} points! 🎯\n\n#2048Challenge #BrainGame #GamingSkills`,
+          `🔥 My latest 2048 run - ${currentScore.toLocaleString()} points and ${maxTile} max tile! Can you beat this? 💪\n\n#2048Master #PuzzleMaster #GamingChallenge`
+        ],
+        de: [
+          `🎮 Gerade mein 2048-Gameplay aufgenommen! ${currentScore.toLocaleString()} Punkte mit maximalem Stein ${maxTile}! 🚀\n\n#2048Spiel #Denkspiel #Gaming #Können`,
+          `🧠 Schaut euch meine 2048-Strategie an! ${maxTile}-Stein mit ${currentScore.toLocaleString()} Punkten erreicht! 🎯\n\n#2048Herausforderung #Denkspiel`,
+          `🔥 Mein neuester 2048-Lauf - ${currentScore.toLocaleString()} Punkte und ${maxTile} maximaler Stein! Könnt ihr das schlagen? 💪\n\n#2048Meister`
+        ],
+        ja: [
+          `🎮 2048のゲームプレイを録画しました！${currentScore.toLocaleString()}点で最大タイル${maxTile}！🚀\n\n#2048ゲーム #パズルゲーム #ゲーミング #スキル`,
+          `🧠 私の2048戦略をご覧ください！${maxTile}タイルで${currentScore.toLocaleString()}点達成！🎯\n\n#2048チャレンジ #脳トレ`,
+          `🔥 最新の2048プレイ - ${currentScore.toLocaleString()}点、最大タイル${maxTile}！これを超えられる？💪\n\n#2048マスター`
+        ],
+        ru: [
+          `🎮 Записал свою игру в 2048! Набрал ${currentScore.toLocaleString()} очков с максимальной плиткой ${maxTile}! 🚀\n\n#2048Игра #Головоломка #Гейминг #Навыки`,
+          `🧠 Смотрите мою стратегию 2048 в действии! Достиг плитки ${maxTile} с ${currentScore.toLocaleString()} очками! 🎯\n\n#2048Вызов #Мозговая игра`,
+          `🔥 Мой последний забег в 2048 - ${currentScore.toLocaleString()} очков и плитка ${maxTile}! Сможете побить? 💪\n\n#2048Мастер #Головоломка`
+        ]
+      };
+      
+      const langTemplates = templates[lang] || templates['en'];
+      const randomTemplate = langTemplates[Math.floor(Math.random() * langTemplates.length)];
+      
+      return randomTemplate;
+    }
+
+    function getMaxTile() {
+      const tiles = document.querySelectorAll('.tile .tile-inner');
+      let maxValue = 0;
+      
+      tiles.forEach(tile => {
+        const value = parseInt(tile.textContent) || 0;
+        if (value > maxValue) {
+          maxValue = value;
+        }
+      });
+      
+      return maxValue || 2;
+    }
+
+    function shareToYouTube() {
+      const caption = document.getElementById('share-caption').value;
+      const title = encodeURIComponent(`2048 Game - ${getCurrentScore()} Points!`);
+      const description = encodeURIComponent(caption);
+      
+      // 打开YouTube上传页面
+      window.open(`https://www.youtube.com/upload`, '_blank');
+      
+      // 复制文案到剪贴板
+      copyToClipboard(caption);
+      alert(I18N.t('youtube_upload_hint'));
+    }
+
+    function shareToTwitter() {
+      const caption = document.getElementById('share-caption').value;
+      const tweetText = encodeURIComponent(caption + '\n\nPlay online: https://www.play2048online.com');
+      
+      window.open(`https://twitter.com/intent/tweet?text=${tweetText}`, '_blank');
+    }
+
+    function shareToTikTok() {
+      const caption = document.getElementById('share-caption').value;
+      
+      // TikTok目前不支持直接API分享，打开TikTok创作页面
+      window.open('https://www.tiktok.com/upload', '_blank');
+      
+      copyToClipboard(caption);
+      alert(I18N.t('tiktok_upload_hint'));
+    }
+
+    function shareToInstagram() {
+      const caption = document.getElementById('share-caption').value;
+      
+      // Instagram不支持直接分享，提示用户
+      copyToClipboard(caption);
+      alert(I18N.t('instagram_upload_hint'));
+    }
+
+    function downloadVideoOnly() {
+      if (!currentVideoBlob) return;
+      
+      const url = URL.createObjectURL(currentVideoBlob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = currentVideoFilename;
+      
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 100);
+      
+      hideShareDialog();
+    }
+
+    function copyShareText() {
+      const caption = document.getElementById('share-caption').value;
+      copyToClipboard(caption);
+      alert(I18N.t('caption_copied'));
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+      } else {
+        // 降级方案
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+    }
+
+    // 页面加载时检查浏览器支持
+    document.addEventListener('DOMContentLoaded', function() {
+      const recordButton = document.getElementById('record-button');
+      
+      // 检查浏览器是否支持Canvas录制功能
+      if (!window.MediaRecorder || !HTMLCanvasElement.prototype.captureStream) {
+        recordButton.style.display = 'none';
+        console.log('浏览器不支持Canvas录制功能');
+      }
+    });
   </script>
   
   <footer>

@@ -86,6 +86,49 @@ h1.title {
 .restart-button:hover {
   background: #9f8a76; }
 
+/* 录屏按钮 */
+.record-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ed4014;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #f9f6f2;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-right: 10px; }
+
+.record-button:hover {
+  background: #ff4d1a;
+  transform: translateY(-1px); }
+
+.record-button.recording {
+  background: #ff1744;
+  animation: recording-pulse 1.5s infinite; }
+
+.record-button .record-icon {
+  font-size: 16px;
+  line-height: 1; }
+
+.record-button .record-text {
+  font-size: 13px; }
+
+@keyframes recording-pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.05); 
+  }
+}
+
 #lang-select {
   padding: 5px;
   border: 2px solid #bbada0;
@@ -844,6 +887,27 @@ footer a:hover {
     margin-right: 0;
     margin-bottom: 10px; }
     
+  .record-button {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    font-size: 16px; }
+
+  .record-button:active {
+    transform: scale(0.95); }
+
+  .record-button .record-icon {
+    font-size: 18px; }
+
+  .record-button .record-text {
+    font-size: 14px; }
+
   .restart-button {
     width: 100%;
     text-align: center;
@@ -1239,4 +1303,202 @@ footer a:hover {
 
 .start-btn:hover {
   background: #9f8a76;
+}
+
+/* 分享对话框样式 */
+.share-preview {
+  background: #f9f6f2;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.video-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.video-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.video-details {
+  flex: 1;
+}
+
+.video-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #776e65;
+  margin-bottom: 2px;
+}
+
+.video-subtitle {
+  font-size: 14px;
+  color: #8f7a66;
+}
+
+.share-text-section {
+  margin-bottom: 20px;
+}
+
+.share-text-section label {
+  display: block;
+  font-weight: bold;
+  color: #776e65;
+  margin-bottom: 8px;
+}
+
+#share-caption {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 2px solid #bbada0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  resize: vertical;
+  background: #faf8ef;
+  color: #776e65;
+  box-sizing: border-box;
+}
+
+#share-caption:focus {
+  outline: none;
+  border-color: #8f7a66;
+}
+
+.social-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: white;
+  box-sizing: border-box;
+  min-height: 48px;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.youtube-btn {
+  background: #FF0000;
+}
+
+.youtube-btn:hover {
+  background: #CC0000;
+}
+
+.twitter-btn {
+  background: #1DA1F2;
+}
+
+.twitter-btn:hover {
+  background: #0d8bd9;
+}
+
+.tiktok-btn {
+  background: #000000;
+}
+
+.tiktok-btn:hover {
+  background: #333333;
+}
+
+.instagram-btn {
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+
+.instagram-btn:hover {
+  opacity: 0.9;
+}
+
+.social-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.share-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 2px solid #bbada0;
+  border-radius: 6px;
+  background: #faf8ef;
+  color: #776e65;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  min-height: 44px;
+}
+
+.action-btn:hover {
+  background: #f4f1e8;
+  border-color: #8f7a66;
+}
+
+.action-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* 移动端分享对话框样式 */
+@media screen and (max-width: 768px) {
+  .social-buttons {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .social-btn {
+    padding: 14px;
+    font-size: 16px;
+  }
+  
+  .share-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .action-btn {
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  #share-caption {
+    font-size: 16px;
+    padding: 15px;
+  }
 }
